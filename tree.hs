@@ -3,6 +3,10 @@ module Tree where
 data Tree a = Tree a [Tree a]
      deriving (Show)
 
+instance Functor Tree where
+     fmap fn (Tree x [])= Tree (fn x) []
+     fmap fn (Tree x ts) = Tree (fn x) (map (fmap fn) ts)
+     
 makeTree :: t -> Tree t
 makeTree x = Tree x []
 
